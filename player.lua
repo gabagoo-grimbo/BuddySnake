@@ -25,8 +25,6 @@ function Player:drawWorld()
     gl.assetManager:draw("buddy",self.x*TileSize,self.y*TileSize)
 end
 
-function Player:drawUI() end
-
 function Player:destroy()
     self.moveTimer:destroy()
 end
@@ -74,13 +72,13 @@ function Player:move()
         if self.y < 0 then self.y = self.scene.gridHeight-1 end
     else
         if self.x >= self.scene.gridWidth or self.x < 0 or self.y >= self.scene.gridHeight or self.y < 0 then
-            self.scene.lose = true     
+            self.scene:setLose(true)  
         end
     end
 
     for _,body in ipairs(self.bodies) do
         if self.x == body.x and self.y == body.y then
-            self.scene.lose = true
+            self.scene:setLose(true)  
         end
     end
 
@@ -89,6 +87,7 @@ function Player:move()
         self:addBody()
         self.scene:setScore(self.scene.score + 1)
         apple:move()
+        gl.assetManager:play("Mlem")
     end
 end
 

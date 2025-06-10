@@ -8,10 +8,12 @@ end
 function TitleScene:update()
     if gl.inputManager:justPressed("moveDown") then
         self.cursorSelection = self.cursorSelection + 1
+        gl.assetManager:play("Move Cursor")
     end
 
     if gl.inputManager:justPressed("moveUp") then
         self.cursorSelection = self.cursorSelection - 1
+        gl.assetManager:play("Move Cursor")
     end
 
     self.cursorSelection = gl.math.clamp(self.cursorSelection,0,6)
@@ -20,7 +22,7 @@ function TitleScene:update()
     local walls = false
 
     if gl.inputManager:justPressed("start") then
-        
+        gl.assetManager:play("Select")
         if self.cursorSelection == 0 then
             difficulty = "Easy"
             walls = false

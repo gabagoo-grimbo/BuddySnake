@@ -22,7 +22,6 @@ end
 
 function love.update()
     gl:update()
-    print(love.timer.getFPS())
 end
 
 function love.draw()
@@ -35,6 +34,12 @@ function gl.initAssets()
 
     gl.assetManager:importFont("ibm32","assets/font/MxPlus_IBM_EGA_8x8.ttf",32)
     gl.assetManager:importFont("ibm16","assets/font/MxPlus_IBM_EGA_8x8.ttf",16)
+
+    gl.assetManager:importSound("Paper Steak","assets/wav/paper_steak.wav","stream")
+    gl.assetManager:importSound("Womp","assets/wav/womp.wav","static")
+    gl.assetManager:importSound("Move Cursor","assets/wav/move_cursor.wav","static")
+    gl.assetManager:importSound("Select","assets/wav/select.wav","static")
+    gl.assetManager:importSound("Mlem","assets/wav/mlem.wav","static")
 end
 
 function gl.initInputs()

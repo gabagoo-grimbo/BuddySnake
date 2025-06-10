@@ -1,9 +1,43 @@
 local assetManager = {
     images = {},
     sheets = {},
-    sounds = {},
-    fonts = {}
+    fonts = {},
+    sounds = {}
 }
+
+-- Sounds
+function assetManager:importSound(soundName,filePath,type)
+    local sound = {}
+    sound.name = soundName
+    sound.filePath = filePath
+    sound.data = love.audio.newSource(filePath,type)
+    table.insert(self.sounds,sound)
+    return sound
+end
+
+function assetManager:getSound(soundName)
+    for _,sound in ipairs(self.sounds) do
+        if sound.name == soundName then
+            return sound
+        end
+    end
+end
+
+function assetManager:play(soundName)
+    self:getSound(soundName).data:play()
+end
+
+function assetManager:stop(soundName)
+    self:getSound(soundName).data:stop()
+end
+
+function assetManager:isPlaying(soundName)
+    self:getSound(soundName).data:isPlaying()
+end
+
+function assetManager:setVolume(soundName,volume)
+    self:getSound(soundName).data:setVolume(volume)
+end
 
 -- Images
 function assetManager:importImage(imageName,filePath)
@@ -11,8 +45,8 @@ function assetManager:importImage(imageName,filePath)
     image.name = imageName
     image.filePath = filePath
     image.data = love.graphics.newImage(filePath)
-
     table.insert(self.images,image)
+    return image
 end
 
 function assetManager:getImage(imageName)
@@ -48,6 +82,7 @@ function assetManager:importSheet(sheetName, filePath, cellWidth, cellHeight)
     end
 
     table.insert(self.sheets,sheet)
+    return sheet
 end
 
 function assetManager:getSheet(sheetName)
@@ -99,6 +134,7 @@ function assetManager:importFont(fontName, filePath, size)
     font.data = love.graphics.newFont(filePath, size)
 
     table.insert(self.fonts,font)
+    return font
 end
 
 function assetManager:getFont(fontName)

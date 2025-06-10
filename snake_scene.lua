@@ -27,19 +27,28 @@ end
 
 function SnakeScene:update()
     if self.lose then
+        gl.assetManager:stop("Paper Steak")
+
         if gl.inputManager:justPressed("moveUp") then
+            gl.assetManager:play("Move Cursor")
             self.startAgain = true
         end
         if gl.inputManager:justPressed("moveDown") then
+            gl.assetManager:play("Move Cursor")
             self.startAgain = false
         end
 
         if gl.inputManager:justPressed("start") then
+            gl.assetManager:play("Select")
             if self.startAgain then
                 gl.sceneManager:changeScene("Snake",self.difficulty,self.walls)
             else
                 gl.sceneManager:changeScene("Title")
             end
+        end
+    else
+        if not gl.assetManager:isPlaying("Paper Steak") then
+            gl.assetManager:play("Paper Steak")
         end
     end
 end
@@ -82,6 +91,15 @@ function SnakeScene:drawUI()
         end
 
         gl.assetManager:print("ibm16",">",384-24,cursorY)
+    end
+end
+
+function SnakeScene:setLose(bool)
+    if bool then
+       self.lose = true
+       gl.assetManager:play("Womp")
+    else
+        self.lose = false
     end
 end
 
