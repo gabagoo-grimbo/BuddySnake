@@ -52,8 +52,7 @@ function gl:update()
     self.sceneManager.currentScene:_update()
 
     if self.inputManager:justPressed("screenshot") then
-        love.graphics.captureScreenshot(os.time()..".png")
-        print("screen shot taken")
+        gl.screenShot()
     end
 end
 
@@ -70,12 +69,13 @@ function gl:draw()
     self.sceneManager.currentScene:_drawUI()
 end
 
-function gl.initInputs()
+function gl.initInputs() end
 
-end
+function gl.initAssets() end
 
-function gl.initAssets()
-
+function gl.screenShot()
+    love.graphics.captureScreenshot(os.time()..".png")
+    print("screen shot taken")
 end
 
 return gl
