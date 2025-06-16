@@ -12,7 +12,7 @@ TileSize = 32
 
 -- Game loop
 function love.load()
-    gl:load(CamWidth,CamHeight,WinScale)
+    gl:load(CamWidth,CamHeight,WinScale,true)
     love.math.setRandomSeed(love.timer.getTime())
     love.graphics.setDefaultFilter("nearest")
     LoadGame()

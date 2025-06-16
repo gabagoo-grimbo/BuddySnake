@@ -13,8 +13,4 @@ function window.openConsole()
     love._openConsole()
 end
 
-function window.closeConsole()
-    love._closeConsole()
-end
-
 return window

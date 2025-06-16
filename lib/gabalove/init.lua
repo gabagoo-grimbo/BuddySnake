@@ -12,6 +12,7 @@ gl.Object = gl:require "classic" -- I didnt make this but its really good and it
 gl.GameObject = gl:require "game_object"
 gl.Scene = gl:require "scene.scene"
 
+gl.urfs = gl:require "urfs" -- I also didnt make this one fuck you
 gl.sceneManager = gl:require "scene.scene_manager"
 gl.timerManager = gl:require "timer.timer_manager"
 gl.assetManager = gl:require "asset_manager"
@@ -24,9 +25,16 @@ gl.math = gl:require "math"
 local gl = gl
 _G.gl = nil
 
-function gl:load(viewportWidth,viewportHeight,viewportScale)
-    love.filesystem.setIdentity("Gabalove")
-    self.window.openConsole()
+function gl:load(viewportWidth,viewportHeight,viewportScale,console)
+    if console == true then 
+        self.window.openConsole()
+    end
+
+    self.urfs.setWriteDir(love.filesystem.getSource())
+    if love.filesystem.getInfo("screenshots") == nil then
+        love.filesystem.createDirectory("screenshots")
+    end
+
     self.viewport.width = viewportWidth
     self.viewport.height = viewportHeight
     self.viewport.scale = viewportScale
@@ -74,7 +82,7 @@ function gl.initInputs() end
 function gl.initAssets() end
 
 function gl.screenShot()
-    love.graphics.captureScreenshot(os.time()..".png")
+    love.graphics.captureScreenshot("screenshots/"..os.time()..".png")
     print("screen shot taken")
 end
 
