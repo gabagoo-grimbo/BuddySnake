@@ -15,6 +15,7 @@ function love.load()
     gl:load(CamWidth,CamHeight,WinScale)
     love.math.setRandomSeed(love.timer.getTime())
     love.graphics.setDefaultFilter("nearest")
+    LoadGame()
     gl.sceneManager:addScene(TitleScene,"Title")
     gl.sceneManager:addScene(SnakeScene,"Snake")
     gl.sceneManager:changeScene("Title")
@@ -49,4 +50,30 @@ function gl.initInputs()
     gl.inputManager:addInput("moveRight",{"d","right"},{})
     gl.inputManager:addInput("move",{"w","up","a","left","s","down","d","right"},{})
     gl.inputManager:addInput("start",{"z","return","space"},{})
+end
+
+function SetHighscore(newScore)
+    HighScore = newScore
+    SaveGame()
+end
+
+function SaveGame()
+    local file = io.open("save_data","w")
+    if file then
+        file:write(tostring(HighScore))
+        file:close()
+    else
+        error("Failed to open save file")
+    end
+end
+
+function LoadGame()
+    local file = io.open("save_data","r")
+    if file then
+        local contents = file:read("*a")
+        SetHighscore(tonumber(contents))
+        file:close()
+    else
+        SaveGame()
+    end
 end

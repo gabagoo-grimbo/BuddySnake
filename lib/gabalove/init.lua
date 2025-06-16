@@ -25,6 +25,7 @@ local gl = gl
 _G.gl = nil
 
 function gl:load(viewportWidth,viewportHeight,viewportScale)
+    love.filesystem.setIdentity("Gabalove")
     self.window.openConsole()
     self.viewport.width = viewportWidth
     self.viewport.height = viewportHeight
@@ -39,6 +40,8 @@ function gl:load(viewportWidth,viewportHeight,viewportScale)
     self.sceneManager:changeScene("Default")
 
     self.initAssets()
+
+    self.inputManager:addInput("screenshot",{"f12"},{})
     self.initInputs()
 end
 
@@ -47,6 +50,11 @@ function gl:update()
     self.mouse:update()
     self.timerManager:update()
     self.sceneManager.currentScene:_update()
+
+    if self.inputManager:justPressed("screenshot") then
+        love.graphics.captureScreenshot(os.time()..".png")
+        print("screen shot taken")
+    end
 end
 
 function gl:draw()

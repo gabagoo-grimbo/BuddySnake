@@ -77,9 +77,9 @@ function TitleScene:drawUI()
     gl.assetManager:printCenter("ibm16","Easy",320,64)
     gl.assetManager:printCenter("ibm16","Normal",320,96)
     gl.assetManager:printCenter("ibm16","Hard",320,96+32)
-    gl.assetManager:printCenter("ibm16","walls Easy",320,96+64)
-    gl.assetManager:printCenter("ibm16","walls Normal",320,96+96)
-    gl.assetManager:printCenter("ibm16","walls Hard",320,96+128)
+    gl.assetManager:printCenter("ibm16","Walls Easy",320,96+64)
+    gl.assetManager:printCenter("ibm16","Walls Normal",320,96+96)
+    gl.assetManager:printCenter("ibm16","Walls Hard",320,96+128)
     gl.assetManager:printCenter("ibm16","Quit",320,96+128+32)
 
     -- Cursor position

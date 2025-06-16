@@ -75,7 +75,7 @@ function SnakeScene:drawUI()
 
     gl.assetManager:draw("buddy board",0,194)
 
-    if self.lose == true then
+    if self.lose then
         love.graphics.setColor(1,0,0)
         gl.assetManager:printCenter("ibm32","YOU LOSE",416,196)
         love.graphics.setColor(1,1,1)
@@ -106,7 +106,7 @@ end
 function SnakeScene:setScore(n)
     self.score = n
     if self.score > HighScore then
-        HighScore = self.score
+        SetHighscore(self.score)
     end
 end
 
